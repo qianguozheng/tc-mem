@@ -16,12 +16,6 @@ static tc_slab_conf_t slabs = {
     { 0, 0 }
 };
 
-tc_mpool_t *
-tc_mem_create()
-{
-
-}
-
 int
 tc_mem_init(tc_mpool_t *pool)
 {

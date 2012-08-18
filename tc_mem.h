@@ -25,7 +25,6 @@ typedef struct {
     tc_slab_t *head;   
 } tc_mpool_t;
 
-tc_mpool_t *tc_mem_create();
 int tc_mem_init(tc_mpool_t *pool);
 void *tc_mem_malloc(tc_mpool_t *pool, size_t size);
 void tc_mem_free(tc_mpool_t *pool, void *p, size_t size);
