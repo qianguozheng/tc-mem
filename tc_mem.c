@@ -1,5 +1,5 @@
 
-static int tc_mem_trunk_init(tc_mpool_t *pool);
+static int tc_mem_chunk_init(tc_mpool_t *pool);
 
 static tc_slab_conf_t slabs = {
     { 8, 10 },
@@ -41,7 +41,7 @@ tc_mem_init(tc_mpool_t *pool)
     pool->max = 4096;
     pool->slabs = n;
 
-    if (tc_mem_trunk_init(tc_mpool_t *pool) == TC_MEM_ERROR) {
+    if (tc_mem_chunk_init(tc_mpool_t *pool) == TC_MEM_ERROR) {
         return TC_MEM_ERROR;
     }
 
@@ -62,12 +62,12 @@ tc_mem_free(tc_mpool_t *pool, void *p, size_t size)
 
 /* TODO need to callocate size */
 static int
-tc_mem_trunk_init(tc_mpool_t *pool)
+tc_mem_chunk_init(tc_mpool_t *pool)
 {
     int         i, j;
     char       *p;
     tc_slab_t  *slab;
-    tc_trunk_t *trunk;
+    tc_chunk_t *chunk;
 
     for (i = 0; i < pool->slabs; i++) {
         slab = pool->head + i;
@@ -82,9 +82,9 @@ tc_mem_trunk_init(tc_mpool_t *pool)
         slab->free = p;
 
         for (j = 0; j < slab->total - 1; j++) {
-            trunk = (tc_trunk_t *) p;
+            chunk = (tc_chunk_t *) p;
             p += slab->size;
-            trunk->next = p;
+            chunk->next = p;
         }
     }
 

@@ -10,14 +10,14 @@ typedef struct {
 } tc_slab_conf_t;
 
 typedef struct {
-    uint32_t  size;  /* size of a trunk */
-    uint32_t  total; /* number of trunks */
+    uint32_t  size;  /* size of a chunk */
+    uint32_t  total; /* number of chunks */
     void     *free;
 } tc_slab_t;
 
 typedef struct {
     void *next;
-} tc_trunk_t;
+} tc_chunk_t;
 
 typedef struct {
     int        slabs; /* number of slabs */
